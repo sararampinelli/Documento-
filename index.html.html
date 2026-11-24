@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Este documento é válido!</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Nunito+Sans:wght@400;600;700&display=swap">
+<style>
+/* Layout: coluna única de leitura com blocos suaves; formas orgânicas da cartilha ao fundo */
+:root{
+  --bg:#FCF1E8; --fg:#1E1713; --muted:#5E4C43;
+  --teal:#CDE0E0; --clay:#D4A08F; --rust:#A94F36; --card:#F5DFD3; --line:#E4C9BA;
+  --on-rust:#FFF8F2;
+  --f-display:'Jost','Century Gothic',system-ui,sans-serif;
+  --f-body:'Nunito Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#1F1613; --fg:#F6E9DF; --muted:#CDB8AA;
+  --teal:#2B4547; --clay:#7A4A3C; --rust:#E58C70; --card:#2D201B; --line:#46342C;
+  --on-rust:#1F1613; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#1F1613; --fg:#F6E9DF; --muted:#CDB8AA;
+  --teal:#2B4547; --clay:#7A4A3C; --rust:#E58C70; --card:#2D201B; --line:#46342C;
+  --on-rust:#1F1613; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:17px;line-height:1.6;
+  padding-block:0 3rem;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  position:relative;overflow-x:hidden}
+.blob{position:absolute;z-index:0;pointer-events:none;border-radius:50%}
+.b1{width:min(70vw,520px);aspect-ratio:1;background:var(--teal);right:-18vw;top:-14vw}
+.b2{width:min(40vw,260px);aspect-ratio:1;background:var(--rust);left:-12vw;top:62rem;border-radius:58% 42% 55% 45%;opacity:.9}
+.wrap{position:relative;z-index:1;max-width:46rem;margin-inline:auto}
+h1,h2,h3{font-family:var(--f-display);font-weight:300;line-height:1.1;text-wrap:balance;margin:0}
+h1{font-size:clamp(2.6rem,10vw,4.6rem);letter-spacing:.01em}
+h2{font-size:clamp(1.9rem,6vw,2.6rem);margin-bottom:1.1rem}
+h3{font-size:1.35rem;font-weight:400}
+p{margin:0 0 .9rem;max-width:65ch}
+a{color:var(--rust);text-underline-offset:3px}
+a:focus-visible,summary:focus-visible,button:focus-visible{outline:3px solid var(--rust);outline-offset:3px;border-radius:4px}
+.eyebrow{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
+
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);
+  margin-inline:calc(-1*max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+nav ul{list-style:none;margin:0 auto;padding:.7rem 0;display:flex;gap:1.2rem;overflow-x:auto;max-width:46rem;white-space:nowrap}
+nav a{text-decoration:none;color:var(--fg);font-weight:600;font-size:.95rem}
+nav a:hover{color:var(--rust)}
+
+header.hero{padding-block:4.5rem 3rem;position:relative;z-index:1}
+.hero p.lead{font-size:1.2rem;margin-top:1.4rem;max-width:34ch}
+.hero .eyebrow{margin-bottom:1rem}
+section{padding-block:2.8rem 1rem;scroll-margin-top:4rem}
+
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1rem}
+.card{background:var(--card);border-radius:22px;padding:1.3rem 1.3rem 1.1rem;min-width:0}
+.card h3{margin-bottom:.5rem}
+.card.teal{background:var(--teal)}
+.tag{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--rust);margin-bottom:.4rem}
+.law{font-size:.85rem;color:var(--muted)}
+
+ol.steps{list-style:none;margin:0 0 1.5rem;padding:0;display:grid;gap:.6rem}
+ol.steps li{background:var(--card);border-radius:18px;padding:.8rem 1.1rem}
+ol.steps b{color:var(--rust)}
+.avoid{border-left:4px solid var(--rust);padding:.2rem 0 .2rem 1rem;margin-top:1rem}
+.avoid ul{margin:.4rem 0 0;padding-left:1.1rem}
+
+details{background:var(--card);border-radius:18px;margin-bottom:.6rem}
+summary{cursor:pointer;list-style:none;padding:1rem 3rem 1rem 1.2rem;font-weight:700;position:relative;min-height:3rem}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";position:absolute;right:1.1rem;top:.55rem;font-size:1.6rem;font-weight:300;color:var(--rust);line-height:1.4}
+details[open] summary::after{content:"–"}
+details .ans{padding:0 1.2rem 1.1rem}
+.sim{display:inline-block;background:var(--rust);color:var(--on-rust);font-weight:700;border-radius:99px;padding:.05rem .7rem;font-size:.9rem;margin-right:.4rem}
+
+.place{background:var(--card);border-radius:22px;padding:1.2rem 1.3rem;margin-bottom:.8rem;min-width:0}
+.place h3{font-size:1.2rem;margin-bottom:.4rem;font-weight:500}
+.place p{margin-bottom:.35rem;overflow-wrap:anywhere}
+.place.unesc{background:var(--teal)}
+.note{font-size:.9rem;color:var(--muted)}
+.tel{font-weight:700;font-variant-numeric:tabular-nums}
+.copy{font:inherit;font-size:.8rem;font-weight:700;border:1.5px solid var(--rust);background:transparent;color:var(--rust);border-radius:99px;padding:.15rem .75rem;margin-left:.4rem;cursor:pointer}
+.copy:hover{background:var(--rust);color:var(--on-rust)}
+
+ul.src{padding-left:1.1rem;font-size:.95rem}
+ul.src li{margin-bottom:.4rem;overflow-wrap:anywhere}
+footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--line);font-size:.9rem;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+
+</head>
+<body>
+<div class="blob b1"></div>
+<div class="blob b2"></div>
+
+<div class="wrap">
+<nav aria-label="Seções"><ul>
+  <li><a href="#documentos">Documentos</a></li>
+  <li><a href="#atender">Como atender</a></li>
+  <li><a href="#perguntas">Perguntas</a></li>
+  <li><a href="#ajuda">Onde buscar ajuda</a></li>
+  <li><a href="#fontes">Fontes</a></li>
+</ul></nav>
+
+<header class="hero">
+  <p class="eyebrow">Guia rápido para atender migrantes e refugiados</p>
+  <h1>Este documento é válido!</h1>
+  <p class="lead">Protocolo de refúgio, DPRNM e CRNM identificam a pessoa e dão acesso a serviços. Veja como conferir e o que a lei diz.</p>
+</header>
+
+<section id="documentos">
+  <h2>Conheça os documentos</h2>
+  <div class="grid2">
+    <div class="card">
+      <span class="tag">Quem pediu refúgio</span>
+      <h3>Protocolo de Refúgio</h3>
+      <p>A Polícia Federal emite o protocolo quando a pessoa pede refúgio. Ele autoriza a pessoa a ficar no país até a decisão final.</p>
+      <p class="law">Lei 9.474/1997, art. 21.</p>
+    </div>
+    <div class="card">
+      <span class="tag">Quem pediu refúgio</span>
+      <h3>DPRNM</h3>
+      <p>Documento Provisório de Registro Nacional Migratório. É a carteira de identificação da pessoa que aguarda a decisão. A Polícia Federal entrega gratuitamente.</p>
+      <p class="law">Decreto 9.277/2018, arts. 2º e 3º.</p>
+    </div>
+    <div class="card teal">
+      <span class="tag">Quem foi reconhecido</span>
+      <h3>CRNM</h3>
+      <p>Carteira de Registro Nacional Migratório. A pessoa reconhecida como refugiada pede a CRNM na Polícia Federal. A residência é por prazo indeterminado.</p>
+      <p class="law">Lei 9.474/1997, art. 28; folder CRNM do ACNUR.</p>
+    </div>
+  </div>
+  <p style="margin-top:1rem">O protocolo e o DPRNM valem <strong>1 ano</strong> e são renovados na Polícia Federal até a decisão. A pessoa deve renovar antes do vencimento.</p>
+</section>
+
+<section id="atender">
+  <h2>Como atender</h2>
+  <ol class="steps">
+    <li><b>Acolha.</b> Converse sem julgamento e respeite a história da pessoa.</li>
+    <li><b>Confira.</b> Veja qual documento a pessoa apresenta e a data de validade.</li>
+    <li><b>Oriente.</b> Consulte a fonte oficial antes de pedir outro documento.</li>
+    <li><b>Encaminhe.</b> Em caso de dúvida ou recusa, indique a rede de apoio abaixo.</li>
+  </ol>
+  <div class="avoid">
+    <h3>Evite</h3>
+    <ul>
+      <li>Exigir passaporte ou documento do país de origem sem necessidade.</li>
+      <li>Presumir que a pessoa não tem direitos por ser estrangeira.</li>
+      <li>Dificultar o atendimento por causa do idioma.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="perguntas">
+  <h2>Perguntas e respostas</h2>
+
+  <details>
+    <summary>Qual a diferença entre migrante, solicitante de refúgio e refugiado?</summary>
+    <div class="ans">
+      <p><strong>Migrante</strong> é quem sai de um país para viver em outro. A <strong>pessoa solicitante de refúgio</strong> pediu proteção ao Brasil e espera a decisão do Comitê Nacional para os Refugiados (Conare). A <strong>pessoa refugiada</strong> teve o pedido aprovado.</p>
+      <p>Refugiado é quem foge de perseguição ou de grave e generalizada violação de direitos humanos.</p>
+      <p class="law">Lei 9.474/1997, art. 1º; Lei 13.445/2017.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>O protocolo de refúgio vale como documento de identidade?</summary>
+    <div class="ans">
+      <p><span class="sim">Sim</span>O protocolo e o DPRNM identificam a pessoa e dão acesso a serviços públicos, como educação, saúde, previdência e assistência social.</p>
+      <p class="law">Lei 9.474/1997, art. 21; Decreto 9.277/2018, art. 3º; Lei 13.445/2017, art. 19, §3º.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Posso atender se o documento não estiver completo?</summary>
+    <div class="ans">
+      <p><span class="sim">Sim</span>Saúde, assistência social e educação públicas não podem ser negadas por causa da nacionalidade ou da situação migratória. Enquanto a identificação civil não sai, o comprovante de que a pessoa a pediu garante o acesso aos direitos.</p>
+      <p class="law">Lei 13.445/2017, art. 4º, VIII e X; art. 19, §3º.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>A pessoa não tem documento do país de origem. E agora?</summary>
+    <div class="ans">
+      <p>Não recuse o atendimento por isso. A lei manda considerar a situação especial do refugiado quando pedem documentos do país de origem. A identificação de quem pediu refúgio pode ser feita com os documentos que a pessoa tiver.</p>
+      <p class="law">Lei 9.474/1997, art. 43; Lei 13.445/2017, art. 20.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>A criança pode se matricular na escola sem documentos?</summary>
+    <div class="ans">
+      <p><span class="sim">Sim</span>A matrícula de crianças e adolescentes migrantes, refugiados e solicitantes de refúgio deve ser feita de imediato, sem exigir documentos. A falta de documento de escolaridade anterior ou de tradução não impede a matrícula.</p>
+      <p class="law">Resolução CNE/CEB nº 1/2020; Lei 13.445/2017, art. 4º, X.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>A pessoa pode abrir conta em banco?</summary>
+    <div class="ans">
+      <p><span class="sim">Sim</span>A lei garante o direito de abrir conta bancária ao migrante.</p>
+      <p class="law">Lei 13.445/2017, art. 4º, XIV.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Preciso atender uma pessoa que não fala português?</summary>
+    <div class="ans">
+      <p>As autoridades devem ser tolerantes com o idioma da pessoa imigrante quando ela procura órgãos públicos para reivindicar seus direitos. Use gestos, tradutor de celular ou peça ajuda a um colega.</p>
+      <p class="law">Lei 13.445/2017, art. 112.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Os documentos são pagos?</summary>
+    <div class="ans">
+      <p>O DPRNM é gratuito. Para outros documentos de regularização, grupos vulneráveis e pessoas sem condição de pagar não pagam taxas.</p>
+      <p class="law">Decreto 9.277/2018, art. 2º; Lei 13.445/2017, art. 113, §3º.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Quero regularizar minha situação no Brasil. O que faço?</summary>
+    <div class="ans">
+      <p>Procure a Polícia Federal. Quem pede refúgio recebe autorização provisória de residência até a resposta. Outros tipos de residência, como reunião familiar, também são pedidos na Polícia Federal. Confira a lista de documentos no site oficial antes de ir.</p>
+      <p class="law">Lei 13.445/2017, arts. 30 e 31, §4º.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Posso trazer minha família?</summary>
+    <div class="ans">
+      <p>A lei prevê autorização de residência para reunião familiar. Podem ser chamados: cônjuge ou companheiro; filhos; ascendentes, descendentes até o segundo grau e irmãos de brasileiro ou de imigrante com residência; e quem tem brasileiro sob tutela ou guarda. Procure a Polícia Federal ou um serviço de orientação jurídica.</p>
+      <p class="law">Lei 13.445/2017, arts. 3º, VIII, 4º, III e 37.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>O que é xenofobia e onde denunciar?</summary>
+    <div class="ans">
+      <p>Xenofobia é o preconceito ou a discriminação contra pessoas migrantes ou estrangeiras. A política migratória brasileira repudia a xenofobia, o racismo e qualquer forma de discriminação.</p>
+      <p>Denuncie no <strong>Disque 100</strong>, de qualquer telefone, 24 horas por dia, todos os dias. O serviço recebe denúncias de violência contra migrantes e refugiados.</p>
+      <p class="law">Lei 13.445/2017, art. 3º, II; Lei 7.716/1989.</p>
+    </div>
+  </details>
+</section>
+
+<section id="ajuda">
+  <h2>Onde buscar ajuda</h2>
+  <p class="note">Contatos conferidos em fontes públicas em 24/11/2026. Ligue antes de ir.</p>
+
+  <div class="place unesc">
+    <h3>Clínica de Direitos Humanos da UNESC</h3>
+    <p>Atendimento acolhido e humanitário. Orienta pessoas migrantes e associações de migrantes. Oferece orientação administrativa, educação em direitos e orientação jurídica. <strong>Não há limite de renda.</strong></p>
+    <p>Av. Universitária, 1105, Bairro Universitário, Bloco C, sala 9, Criciúma.</p>
+  </div>
+
+  <div class="place unesc">
+    <h3>Casa da Cidadania (UNESC)</h3>
+    <p>Atendimento jurídico gratuito, conciliação e mediação para pessoas com <strong>renda de até 3 salários mínimos</strong>.</p>
+    <p>Centro: Rua Agrimensor Casemiro Milioli, 123. <span class="tel">(48) 3433-4080</span> · WhatsApp <span class="tel">(48) 99949-8712</span></p>
+    <p>Próspera: Rua Sergipe, 91. <span class="tel">(48) 3462-9935</span><br>Rio Maina: Av. dos Imigrantes, 1340. <span class="tel">(48) 3442-1879</span></p>
+  </div>
+
+  <div class="place">
+    <h3>Polícia Federal em Criciúma</h3>
+    <p>Pedido e renovação de protocolo, DPRNM, CRNM e autorização de residência.</p>
+    <p>Av. Centenário, 4353, Pio Corrêa. <span class="tel" id="pf">(48) 3461-8600</span>
+      <button class="copy" type="button" data-copy="(48) 3461-8600" aria-label="Copiar telefone da Polícia Federal">Copiar</button></p>
+  </div>
+
+  <div class="place">
+    <h3>Defensoria Pública do Estado de SC (Criciúma)</h3>
+    <p>Orientação e assistência jurídica gratuita, conforme critérios de atendimento.</p>
+    <p>Av. Santos Dumont, 798. <span class="tel">(48) 3403-1133</span> ou <span class="tel">(48) 3403-1051</span></p>
+  </div>
+
+  <div class="place">
+    <h3>Defensoria Pública da União (Criciúma)</h3>
+    <p>Assistência jurídica gratuita em questões federais, como as de migração.</p>
+    <p>Av. Centenário, 3029. Confirme o endereço e o contato antes de ir.</p>
+  </div>
+
+  <div class="place">
+    <h3>Disque 100</h3>
+    <p>Denúncia de violação de direitos humanos, inclusive contra migrantes e refugiados. Ligue 100. Atendimento 24 horas.</p>
+  </div>
+
+  <div class="place">
+    <h3>ACNUR Brasil (online)</h3>
+    <p>Informações para solicitantes de refúgio e refugiados: <a href="https://help.unhcr.org/brazil/" target="_blank" rel="noopener">help.unhcr.org/brazil</a></p>
+  </div>
+</section>
+
+<section id="fontes">
+  <h2>Fontes</h2>
+  <ul class="src">
+    <li><a href="https://planalto.gov.br/ccivil_03/LEIS/L9474.htm" target="_blank" rel="noopener">Lei 9.474/1997 (Estatuto dos Refugiados)</a></li>
+    <li><a href="https://planalto.gov.br/ccivil_03/_ato2015-2018/2017/lei/l13445.htm" target="_blank" rel="noopener">Lei 13.445/2017 (Lei de Migração)</a></li>
+    <li><a href="https://legis.senado.leg.br/norma/26349555/publicacao/26349564" target="_blank" rel="noopener">Decreto 9.277/2018 (DPRNM)</a></li>
+    <li><a href="https://abmes.org.br/legislacoes/resolucao-cne-ceb-no-1-3419" target="_blank" rel="noopener">Resolução CNE/CEB nº 1/2020 (matrícula)</a></li>
+    <li><a href="https://help.unhcr.org/brazil/pt-br/documentos/" target="_blank" rel="noopener">ACNUR: documentos de solicitantes de refúgio</a></li>
+    <li><a href="https://www.gov.br/pt-br/servicos/obter-documento-provisorio-de-registro-nacional-migratorio" target="_blank" rel="noopener">gov.br: Obter DPRNM</a></li>
+    <li><a href="https://www.gov.br/pt-br/servicos/obter-autorizacao-de-residencia-e-carteira-de-registro-migratorio" target="_blank" rel="noopener">gov.br: Obter autorização de residência</a></li>
+    <li><a href="https://www.gov.br/mdh/pt-br/acesso-a-informacao/disque-100" target="_blank" rel="noopener">gov.br: Disque 100</a></li>
+    <li><a href="https://www.gov.br/mj/pt-br/assuntos/seus-direitos/refugio/integracao-local/anexos/220224_folder_crnm_print.pdf" target="_blank" rel="noopener">Folder CRNM (Ministério da Justiça / ACNUR)</a></li>
+    <li><a href="https://www.unesc.net/casas-da-cidadania" target="_blank" rel="noopener">UNESC: Casas da Cidadania</a></li>
+    <li><a href="https://www.tjsc.jus.br/web/conciliacao-e-mediacao/casas-da-cidadania-em-funcionamento" target="_blank" rel="noopener">TJSC: Casas da Cidadania em funcionamento</a></li>
+    <li><a href="https://noticias.unesc.net/geral/2024/06/26/evento-na-unesc-aborda-direitos-das-pessoas-com-fibromialgia-e-acesso-a-justica/" target="_blank" rel="noopener">UNESC: localização da Clínica de Direitos Humanos</a></li>
+  </ul>
+  <footer>
+    <p>Material educativo produzido para a disciplina de Direitos Humanos da UNESC (2026.2). Não substitui orientação jurídica. Em caso de dúvida, procure a Clínica de Direitos Humanos ou a Defensoria Pública.</p>
+  </footer>
+</section>
+</div>
+
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    var t=b.getAttribute('data-copy');
+    var done=function(){var o=b.textContent;b.textContent='Copiado';setTimeout(function(){b.textContent=o},1500)};
+    try{navigator.clipboard.writeText(t).then(done,function(){selectNum()})}catch(e){selectNum()}
+    function selectNum(){var r=document.createRange();r.selectNodeContents(document.getElementById('pf'));var s=getSelection();s.removeAllRanges();s.addRange(r)}
+  });
+});
+</script>
+</body>
+
+</html>
